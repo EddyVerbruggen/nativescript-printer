@@ -1,5 +1,7 @@
 # NativeScript Printer plugin
 
+> Think about the environment before printing!
+
 ## Installation
 From the command prompt go to your app's root folder and execute:
 
