@@ -1,0 +1,15 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+  <ScrollView>
+    <StackLayout id="stackLayout">
+
+      <Image id="printerImage" margin="0" src="~/res/printer.png" width="128" height="128" horizontal-align="center" />
+
+      <Button text="Device supports printing?" tap="{{ printingSupported }}" class="button button-a" />
+
+      <Button text="Print this screen" tap="{{ printScreen }}" class="button button-b" />
+
+      <Button text="Print an image" tap="{{ printImage }}" class="button button-b" />
+
+    </StackLayout>
+  </ScrollView>
+</Page>
