@@ -77,4 +77,4 @@ printer.printScreen().then((success) => {
 ```
 
 ## Future work
-Depending on demand (open an issue!) we can add support for printing other things, like PDF's.
+Depending on demand (open an issue!) we could add support for printing other things, like PDF's.
