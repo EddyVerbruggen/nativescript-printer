@@ -1,6 +1,7 @@
 import {PrinterApi, PrintOptions, PrintImageOptions, PrintScreenOptions} from "./printer.common";
 import * as frame from "ui/frame";
 import * as utils from "utils/utils";
+import { View } from "ui/core/view";
 let application = require("application");
 
 declare let android;
@@ -11,7 +12,6 @@ export class Printer implements PrinterApi {
 
   constructor() {
     this.printManager = utils.ad.getApplicationContext().getSystemService(android.content.Context.PRINT_SERVICE);
-    console.log("--- this.printManager: " + this.printManager)
   }
 
   private static isPrintingSupported(): boolean {
@@ -45,7 +45,7 @@ export class Printer implements PrinterApi {
         let PrintHelper = android.support.v4.print.PrintHelper;
         let printHelper = new PrintHelper(application.android.foregroundActivity);
         printHelper.setScaleMode(PrintHelper.SCALE_MODE_FIT);
-        let jobName = "MyPrintJob"; // TODO custom name
+        let jobName = "MyPrintJob";
         printHelper.printBitmap(jobName, image);
 
         // there's no way to know whether the user printed or canceled, so returning true
@@ -69,12 +69,19 @@ export class Printer implements PrinterApi {
   public printScreen(arg?: PrintScreenOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
       try {
-        let view = frame.topmost().currentPage.content;
-        view.android.setDrawingCacheEnabled(true);
-        let bmp = android.graphics.Bitmap.createBitmap(view.android.getDrawingCache());
-        view.android.setDrawingCacheEnabled(false);
-        // let source = new ImageSource();
-        // source.setNativeSource(bmp);
+        let bmp: any;
+
+        if (arg && arg.view) {
+          let view: View = arg.view;
+          bmp = android.graphics.Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), android.graphics.Bitmap.Config.ARGB_8888);
+          view.android.draw(new android.graphics.Canvas(bmp));
+        } else {
+          let view: View = frame.topmost().currentPage.content;
+          view.android.setDrawingCacheEnabled(true);
+          bmp = android.graphics.Bitmap.createBitmap(view.android.getDrawingCache());
+          view.android.setDrawingCacheEnabled(false);
+        }
+
         this._printImage(bmp, arg).then(resolve, reject);
       } catch (e) {
         reject(e);

@@ -24,3 +24,7 @@ button {
 .button-b {
   background-color: #90A959;
 }
+
+#lines Label {
+  padding: 6 0;
+}

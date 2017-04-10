@@ -1,4 +1,5 @@
-import {ImageSource} from "image-source";
+import { ImageSource } from "image-source";
+import { View } from "ui/core/view";
 
 export interface PrintOptions {
   /**
@@ -6,9 +7,19 @@ export interface PrintOptions {
    * iOS only
    */
   showsNumberOfCopies?: boolean;
+
+  /**
+   * Default false
+   * iOS only
+   */
+  showsPageRange?: boolean;
 }
 
 export interface PrintScreenOptions extends PrintOptions {
+  /**
+   * By default the entire screen is printed, but may be limited to a specific view.
+   */
+  view?: View;
 }
 
 export interface PrintImageOptions extends PrintOptions {

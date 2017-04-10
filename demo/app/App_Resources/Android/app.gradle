@@ -10,7 +10,7 @@ android {
     generatedDensities = []
     applicationId = "org.nativescript.starter"  
   }  
-  aaptOptions {  
-    additionalParameters "--no-version-vectors"  
-  }  
-} 
+  aaptOptions {
+    additionalParameters "--no-version-vectors"
+  }
+}

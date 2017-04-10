@@ -1,0 +1,60 @@
+{
+  "name": "nativescript-printer",
+  "version": "1.0.0",
+  "description": "Send an image or the screen contents to a physical printer",
+  "main": "printer",
+  "typings": "index.d.ts",
+  "nativescript": {
+    "platforms": {
+      "android": "2.3.0",
+      "ios": "2.3.0"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "demo.ios": "npm run preparedemo && cd ../demo && tns run ios --emulator",
+    "demo.ios.device": "npm run preparedemo && cd ../demo && tns platform remove ios && tns run ios",
+    "demo.android": "npm run preparedemo && cd ../demo && tns platform remove android && tns run android --justlaunch",
+    "test.ios": "cd ../demo && tns platform remove ios && tns test ios --emulator",
+    "test.ios.device": "cd ../demo && tns platform remove ios && tns test ios",
+    "test.android": "cd ../demo && tns platform remove android && tns test android --justlaunch",
+    "preparedemo": "npm run build && cd ../demo && tns plugin remove nativescript-printer && tns plugin add ../src && tns install",
+    "setup": "npm i && cd ../demo && npm i && cd ../src && npm run build",
+    "setupandinstall": "npm i && cd ../demo && npm i && cd ../src && npm run build && cd ../demo && tns plugin add ../src && cd ../src",
+    "postclone": "npm i && node scripts/postclone.js",
+    "prepublish": "npm run build",
+    "development.setup": "npm run setup && cd ../demo && npm link ../src && cd ../src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EddyVerbruggen/nativescript-printer.git"
+  },
+  "keywords": [
+    "ecosystem:nativescript",
+    "NativeScript",
+    "JavaScript",
+    "Android",
+    "iOS",
+    "Printer",
+    "Print",
+    "AirPrint",
+    "Printscreen"
+  ],
+  "author": {
+    "name": "Eddy Verbruggen",
+    "email": "eddyverbruggen@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/EddyVerbruggen/nativescript-printer/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/EddyVerbruggen/nativescript-printer",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "tns-core-modules": "^2.5.1",
+    "tns-platform-declarations": "^2.5.0",
+    "typescript": "~2.1.0",
+    "prompt": "^1.0.0",
+    "rimraf": "^2.5.0"
+  }
+}

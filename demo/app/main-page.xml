@@ -6,9 +6,54 @@
 
       <Button text="Device supports printing?" tap="{{ printingSupported }}" class="button button-a" />
 
+      <Button text="Print an image" tap="{{ printImage }}" class="button button-b" />
+
       <Button text="Print this screen" tap="{{ printScreen }}" class="button button-b" />
 
-      <Button text="Print an image" tap="{{ printImage }}" class="button button-b" />
+      <Button text="Print the 40 lines below" tap="{{ printScreenPortion }}" class="button button-b" />
+
+      <StackLayout id="lines" style="margin:30">
+        <Label text="line 1"/>
+        <Label text="line 2"/>
+        <Label text="line 3"/>
+        <Label text="line 4"/>
+        <Label text="line 5"/>
+        <Label text="line 6"/>
+        <Label text="line 7"/>
+        <Label text="line 8"/>
+        <Label text="line 9"/>
+        <Label text="line 10"/>
+        <Label text="line 11"/>
+        <Label text="line 12"/>
+        <Label text="line 13"/>
+        <Label text="line 14"/>
+        <Label text="line 15"/>
+        <Label text="line 16"/>
+        <Label text="line 17"/>
+        <Label text="line 18"/>
+        <Label text="line 19"/>
+        <Label text="line 20"/>
+        <Label text="line 21"/>
+        <Label text="line 22"/>
+        <Label text="line 23"/>
+        <Label text="line 24"/>
+        <Label text="line 25"/>
+        <Label text="line 26"/>
+        <Label text="line 27"/>
+        <Label text="line 28"/>
+        <Label text="line 29"/>
+        <Label text="line 30"/>
+        <Label text="line 31"/>
+        <Label text="line 32"/>
+        <Label text="line 33"/>
+        <Label text="line 34"/>
+        <Label text="line 35"/>
+        <Label text="line 36"/>
+        <Label text="line 37"/>
+        <Label text="line 38"/>
+        <Label text="line 39"/>
+        <Label text="line 40"/>
+      </StackLayout>
 
     </StackLayout>
   </ScrollView>

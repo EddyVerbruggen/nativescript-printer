@@ -1,10 +1,11 @@
-import {PrinterApi, PrintOptions, PrintImageOptions, PrintScreenOptions} from "./printer.common";
-import {DeviceType} from "ui/enums";
-import {device} from "platform";
+import { PrinterApi, PrintOptions, PrintImageOptions, PrintScreenOptions } from "./printer.common";
+import { DeviceType } from "ui/enums";
+import { device } from "platform";
+import { View } from "ui/core/view";
 import * as frame from "ui/frame";
 import * as utils from "utils/utils";
 
-declare let NSClassFromString, UIPrintInteractionController, CGRectMake, UIPrintInfo, UIPrintInfoOutputGeneral, UIApplication,
+declare const NSClassFromString, UIPrintInteractionController, CGRectMake, UIPrintInfo, UIPrintInfoOutputType, UIApplication,
     UIGraphicsBeginImageContextWithOptions, UIGraphicsGetImageFromCurrentImageContext, UIGraphicsEndImageContext, UIImagePNGRepresentation: any;
 
 export class Printer implements PrinterApi {
@@ -28,7 +29,7 @@ export class Printer implements PrinterApi {
     });
   }
 
-  private _printImage(image: any /* UIImage */, options?: PrintOptions): Promise<boolean> {
+  private _printImage(image: any /* UIImage | NSData */, options?: PrintOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
       if (!Printer.isPrintingSupported()) {
@@ -39,10 +40,11 @@ export class Printer implements PrinterApi {
       try {
         const controller = UIPrintInteractionController.sharedPrintController;
         controller.showsNumberOfCopies = options && options.showsNumberOfCopies;
+        controller.showsPageRange = options && options.showsPageRange;
 
         let printInfo = UIPrintInfo.printInfo();
-        printInfo.outputType = UIPrintInfoOutputGeneral;
-        printInfo.jobName = "MyPrintJob"; // TODO appname, etc
+        printInfo.outputType = UIPrintInfoOutputType.General;
+        printInfo.jobName = "MyPrintJob";
         controller.printInfo = printInfo;
         controller.printingItem = image;
 
@@ -52,7 +54,7 @@ export class Printer implements PrinterApi {
 
         if (device.deviceType == DeviceType.Tablet) {
           let view = utils.ios.getter(UIApplication, UIApplication.sharedApplication).keyWindow.rootViewController.view;
-          let theFrame = frame.topmost().currentPage.frame;
+          let theFrame: any = frame.topmost().currentPage.frame;
           controller.presentFromRectInViewAnimatedCompletionHandler(theFrame, view, true, callback);
         } else {
           controller.presentAnimatedCompletionHandler(true, callback);
@@ -76,11 +78,22 @@ export class Printer implements PrinterApi {
   public printScreen(arg?: PrintScreenOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
       try {
-        // let view = utils.ios.getter(UIApplication, UIApplication.sharedApplication).keyWindow.rootViewController.view;
-        let view = frame.topmost().currentPage.content;
+        let view: View;
+        let h: number;
+        let w: number;
+
+        if (arg && arg.view) {
+          view = arg.view;
+          h = view.getMeasuredHeight();
+          w = view.getMeasuredWidth();
+        } else {
+          view = frame.topmost().currentPage.content;
+          h = view.ios.frame.size.height;
+          w = view.ios.frame.size.width;
+        }
 
         UIGraphicsBeginImageContextWithOptions(view.ios.frame.size, false, 0);
-        view.ios.drawViewHierarchyInRectAfterScreenUpdates(CGRectMake(0, 0, view.ios.frame.size.width, view.ios.frame.size.height), true);
+        view.ios.drawViewHierarchyInRectAfterScreenUpdates(CGRectMake(0, 0, w, h), true);
         let imageFromCurrentImageContext = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         let img = UIImagePNGRepresentation(imageFromCurrentImageContext);

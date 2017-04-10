@@ -2,14 +2,14 @@
   "nativescript": {
     "id": "org.nativescript.demo.Printer",
     "tns-ios": {
-      "version": "2.3.0"
+      "version": "2.5.0"
     },
     "tns-android": {
-      "version": "2.3.0"
+      "version": "2.5.0"
     }
   },
   "dependencies": {
-    "nativescript-printer": "file:..",
+    "nativescript-printer": "file:../src",
     "nativescript-unit-test-runner": "^0.3.0",
     "tns-core-modules": "^2.3.0"
   },
