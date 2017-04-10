@@ -1,8 +1,6 @@
 .idea
 .vscode
-.travis.yml
 demo/
-node_modules
 *.gif
 *.log
 *.map
