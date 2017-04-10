@@ -10,19 +10,15 @@ tns plugin add nativescript-printer
 ```
 
 ## Demo app
-Want to dive in quickly? Check out [the demo](demo)! Otherwise, continue reading.
+Want to dive in quickly? Check out [the demo](https://github.com/EddyVerbruggen/nativescript-printer/tree/master/demo)! Otherwise, continue reading.
 
 Run the demo app from the root of the project: `npm run demo.ios` or `npm run demo.android`.
 
 ### Android screenshots
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-printer/master/screenshots/android/android-select-printer.png" width="375px"/>
-
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-printer/master/screenshots/android/android-printer-options.png" width="375px"/>
+<img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-printer/master/screenshots/android/android-select-printer.png" width="375px"/>&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-printer/master/screenshots/android/android-printer-options.png" width="375px"/>
 
 ### iOS screenshots
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-printer/master/screenshots/ios/ios-select-printer.png" width="375px"/>
-
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-printer/master/screenshots/ios/ios-printing-in-progress.png" width="375px"/>
+<img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-printer/master/screenshots/ios/ios-select-printer.png" width="375px"/>&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-printer/master/screenshots/ios/ios-printing-in-progress.png" width="375px"/>
 
 ## API
 
