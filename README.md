@@ -82,5 +82,25 @@ printer.printScreen().then((success) => {
 });
 ```
 
+You can also print a specific portion of the screen, which also enables you to print
+views that are larger than the viewport. This is an example of a non-Angular NativeScript app:
+
+```xml
+  <StackLayout id="printMe">
+    <Label text="Print me :)" />
+  </StackLayout>
+
+  <Button text="Print" tap="{{ print }}" />
+```
+
+```js
+  public print(args) {
+    printer.printScreen({
+      view: args.object.page.getViewById("printMe")
+    });
+  }
+```
+
+
 ## Future work
 Depending on demand (open an issue!) we could add support for printing other things, like PDF's.
