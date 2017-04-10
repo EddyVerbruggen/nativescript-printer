@@ -1,6 +1,6 @@
 {
   "name": "nativescript-printer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Send an image or the screen contents to a physical printer",
   "main": "printer",
   "typings": "index.d.ts",
