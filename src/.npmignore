@@ -1,9 +1,9 @@
 .idea
 .vscode
+.travis.yml
 demo/
-screenshots/
+node_modules
 *.gif
-*.png
 *.log
 *.map
 *.ts
