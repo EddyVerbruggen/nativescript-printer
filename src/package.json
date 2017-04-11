@@ -25,7 +25,7 @@
     "tslint": "tslint *.ts",
     "tslint.demo": "tslint ../demo/app/*.ts",
     "postclone": "npm i && node scripts/postclone.js",
-    "prepublish": "npm run build",
+    "prepublish": "npm run build && npm run tslint",
     "development.setup": "npm run setup && cd ../demo && npm link ../src && cd ../src"
   },
   "repository": {
