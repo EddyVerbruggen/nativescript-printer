@@ -15,7 +15,7 @@
     "demo.ios": "npm run preparedemo && cd ../demo && tns run ios --emulator",
     "demo.ios.device": "npm run preparedemo && cd ../demo && tns platform remove ios && tns run ios",
     "demo.android": "npm run preparedemo && cd ../demo && tns platform remove android && tns run android --justlaunch",
-    "test": "npm run tslint && npm run tslint.demo && tns build ios && npm run test.android",
+    "test": "npm run tslint && npm run tslint.demo && tns build ios && tns build android",
     "test.ios": "cd ../demo && tns platform remove ios && tns test ios --emulator",
     "test.ios.device": "cd ../demo && tns platform remove ios && tns test ios",
     "test.android": "cd ../demo && tns platform remove android && tns test android --justlaunch",
