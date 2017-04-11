@@ -52,7 +52,7 @@ export class Printer implements PrinterApi {
           resolve(success);
         };
 
-        if (device.deviceType == DeviceType.Tablet) {
+        if (device.deviceType === DeviceType.Tablet) {
           let view = utils.ios.getter(UIApplication, UIApplication.sharedApplication).keyWindow.rootViewController.view;
           let theFrame: any = frame.topmost().currentPage.frame;
           controller.presentFromRectInViewAnimatedCompletionHandler(theFrame, view, true, callback);

@@ -1,8 +1,4 @@
-.idea
-.vscode
-demo/
-*.gif
-*.log
+tsconfig.json
 *.map
 *.ts
 !*.d.ts
