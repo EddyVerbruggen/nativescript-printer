@@ -3,6 +3,7 @@ export declare class Printer implements PrinterApi {
     private static isPrintingSupported();
     isSupported(): Promise<boolean>;
     private _printImage(image, options?);
+    private _printView(nativeView, options?);
     printImage(arg: PrintImageOptions): Promise<boolean>;
     printScreen(arg?: PrintScreenOptions): Promise<boolean>;
 }
