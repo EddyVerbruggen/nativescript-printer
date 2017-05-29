@@ -43,8 +43,13 @@
   ],
   "author": {
     "name": "Eddy Verbruggen",
-    "email": "eddyverbruggen@gmail.com"
+    "email": "eddyverbruggen@gmail.com",
+    "url": "https://github.com/EddyVerbruggen"
   },
+  "contributors": [{
+    "name": "Osei Fortune",
+    "url": "https://github.com/triniwiz"
+  }],
   "bugs": {
     "url": "https://github.com/EddyVerbruggen/nativescript-printer/issues"
   },

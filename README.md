@@ -39,7 +39,7 @@ Run the demo app from the root of the project: `npm run demo.ios` or `npm run de
 Not all devices support printing, so it makes sense to check the device capabilties beforehand.
 
 ##### TypeScript
-```js
+```typescript
 // require the plugin
 import {Printer} from "nativescript-printer";
 
@@ -56,7 +56,7 @@ printer.isSupported().then((supported) => {
 ### `printImage`
 
 ##### TypeScript
-```js
+```typescript
 // let's load an image that we can print. In this case from a local folder.
 let fs = require("file-system");
 let appPath = fs.knownFolders.currentApp().path;
@@ -77,7 +77,7 @@ printer.printImage({
 Prints the current screen contents. Anything off screen will not be printed.
 
 ##### TypeScript
-```js
+```typescript
 printer.printScreen().then((success) => {
   alert(success ? "Printed!" : "Not printed");
 }, (error) => {
@@ -108,7 +108,3 @@ If the view is either of the following depending on the size of it's contents it
     });
   }
 ```
-
-
-## Future work
-Depending on demand (open an issue!) we could add support for printing other things, like PDF's.
