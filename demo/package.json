@@ -11,7 +11,7 @@
   "dependencies": {
     "nativescript-printer": "file:../src",
     "nativescript-unit-test-runner": "^0.3.0",
-    "tns-core-modules": "^2.3.0"
+    "tns-core-modules": "^2.5.0"
   },
   "devDependencies": {
     "babel-traverse": "6.12.0",

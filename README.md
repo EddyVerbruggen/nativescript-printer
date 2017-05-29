@@ -88,6 +88,11 @@ printer.printScreen().then((success) => {
 You can also print a specific portion of the screen, which also enables you to print
 views that are larger than the viewport. This is an example of a non-Angular NativeScript app:
 
+**Note**
+If the view is either of the following depending on the size of it's contents it would break into multiple pages.
+
+`Label | TextView | HtmlView | WebView`
+
 ```xml
   <StackLayout id="printMe">
     <Label text="Print me :)" />
