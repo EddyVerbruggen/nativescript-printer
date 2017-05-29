@@ -2,15 +2,13 @@
   <ScrollView>
     <StackLayout id="stackLayout">
 
-      <Image id="printerImage" margin="0" src="~/res/printer.png" width="128" height="128" horizontal-align="center" />
+      <Image id="printerImage" margin="0" src="~/res/printer.png" width="128" height="128" horizontalAlignment="center" />
 
       <Button text="Device supports printing?" tap="{{ printingSupported }}" class="button button-a" />
 
       <Button text="Print an image" tap="{{ printImage }}" class="button button-b" />
 
       <Button text="Print this screen" tap="{{ printScreen }}" class="button button-b" />
-
-      <Button text="Print the 40 lines below" tap="{{ printScreenPortion }}" class="button button-b" />
 
       <Button text="Print WebView" tap="{{ printWebView }}" class="button button-b" />
 
@@ -19,6 +17,8 @@
       <Button text="Print Label" tap="{{ printLabel }}" class="button button-b" />
 
       <Button text="Print TextView" tap="{{ printTextView }}" class="button button-b" />
+
+      <Button text="Print the 40 lines below" tap="{{ printScreenPortion }}" class="button button-b" />
 
       <StackLayout id="lines" style="margin:30">
         <Label id="labelView" text="line 1"/>
@@ -63,7 +63,7 @@
         <Label text="line 40"/>
       </StackLayout>
       <TextView id="textView" text="{{textView}}"/>
-      <WebView height="600" id="webView" url="https://www.nativescript.org"/>
+      <WebView height="600" id="webView" src="https://www.nativescript.org"/>
       <HtmlView id="htmlView" html="{{htmlView + htmlView + htmlView}}"/>
     </StackLayout>
   </ScrollView>
