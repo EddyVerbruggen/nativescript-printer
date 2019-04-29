@@ -1,12 +1,9 @@
 import { PrinterApi, PrintOptions, PrintImageOptions, PrintScreenOptions } from "./printer.common";
-import { DeviceType } from "ui/enums";
-import { device } from "platform";
-import { View } from "ui/core/view";
-import * as frame from "ui/frame";
-import * as utils from "utils/utils";
-
-declare const UITextView, NSClassFromString, UIWebView, UIPrintInteractionController, MKMapView, CGRectMake, UIPrintInfo, UIPrintInfoOutputType, UIApplication,
-  UIGraphicsBeginImageContextWithOptions, UIGraphicsGetImageFromCurrentImageContext, UIGraphicsEndImageContext, UIImagePNGRepresentation: any;
+import { DeviceType } from "tns-core-modules/ui/enums";
+import { device } from "tns-core-modules/platform";
+import { View } from "tns-core-modules/ui/core/view";
+import * as frame from "tns-core-modules/ui/frame";
+import * as utils from "tns-core-modules/utils/utils";
 
 export class Printer implements PrinterApi {
 
@@ -16,7 +13,7 @@ export class Printer implements PrinterApi {
       return false;
     }
     return UIPrintInteractionController.sharedPrintController &&
-      UIPrintInteractionController.printingAvailable;
+        UIPrintInteractionController.printingAvailable;
   }
 
   public isSupported(): Promise<boolean> {
@@ -48,7 +45,7 @@ export class Printer implements PrinterApi {
         controller.printInfo = printInfo;
         controller.printingItem = image;
 
-        let callback = function (controller, success, error) {
+        let callback = (controller, success, error) => {
           resolve(success);
         };
 
@@ -65,7 +62,7 @@ export class Printer implements PrinterApi {
     });
   }
 
-  private _printView(nativeView: any /* UITextView | UIWebView | MKMapView */ , options?: PrintOptions): Promise<boolean> {
+  private _printView(nativeView: any /* UITextView | UIWebView | MKMapView */, options?: PrintOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
       if (!Printer.isPrintingSupported()) {
@@ -84,7 +81,7 @@ export class Printer implements PrinterApi {
         controller.printInfo = printInfo;
         controller.printFormatter = nativeView.viewPrintFormatter();
 
-        let callback = function (controller, success, error) {
+        let callback = (controller, success, error) => {
           resolve(success);
         };
 

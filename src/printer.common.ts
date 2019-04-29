@@ -1,5 +1,5 @@
-import { ImageSource } from "image-source";
-import { View } from "ui/core/view";
+import { ImageSource } from "tns-core-modules/image-source";
+import { View } from "tns-core-modules/ui/core/view";
 
 export interface PrintOptions {
   /**
@@ -28,6 +28,8 @@ export interface PrintImageOptions extends PrintOptions {
 
 export interface PrinterApi {
   isSupported(): Promise<boolean>;
+
   printScreen(arg?: PrintScreenOptions): Promise<boolean>;
+
   printImage(arg: PrintImageOptions): Promise<boolean>;
 }

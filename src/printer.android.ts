@@ -1,8 +1,8 @@
-import {PrinterApi, PrintOptions, PrintImageOptions, PrintScreenOptions} from "./printer.common";
-import * as frame from "ui/frame";
-import * as utils from "utils/utils";
-import { View } from "ui/core/view";
-let application = require("application");
+import * as application from "tns-core-modules/application";
+import { View } from "tns-core-modules/ui/core/view";
+import * as frame from "tns-core-modules/ui/frame";
+import * as utils from "tns-core-modules/utils/utils";
+import { PrinterApi, PrintImageOptions, PrintOptions, PrintScreenOptions } from "./printer.common";
 
 declare let android;
 
@@ -37,7 +37,7 @@ export class Printer implements PrinterApi {
       }
 
       try {
-        let callback = function (success) {
+        let callback = success => {
           resolve(success);
         };
 

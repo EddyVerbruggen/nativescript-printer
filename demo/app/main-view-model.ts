@@ -1,16 +1,18 @@
-import { Observable } from 'data/observable';
-import { Printer } from 'nativescript-printer';
-import { alert } from "ui/dialogs";
-import { ImageSource } from "image-source";
-import { View } from "ui/core/view";
-import { isAndroid } from "platform";
-let fs = require("file-system");
+import { Printer } from "nativescript-printer";
+import { Observable } from "tns-core-modules/data/observable";
+import { ImageSource } from "tns-core-modules/image-source";
+import { isAndroid } from "tns-core-modules/platform";
+import { View } from "tns-core-modules/ui/core/view";
+import { alert } from "tns-core-modules/ui/dialogs";
+
+let fs = require("tns-core-modules/file-system");
 let data = require('./data.json');
-declare const UITextView, UIWebView, MKMapView;
+
 export class HelloWorldModel extends Observable {
   private printer: Printer;
   htmlView: string = data.htmlView;
   textView: string = data.textView;
+
   constructor() {
     super();
     this.printer = new Printer();
