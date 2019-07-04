@@ -4,7 +4,13 @@ import * as frame from "tns-core-modules/ui/frame";
 import * as utils from "tns-core-modules/utils/utils";
 import { PrinterApi, PrintImageOptions, PrintOptions, PrintScreenOptions } from "./printer.common";
 
-declare let android;
+declare let android, global: any;
+
+const PrintPackageName = useAndroidX() ? global.androidx.print : android.support.v4.print;
+
+function useAndroidX () {
+  return global.androidx && global.androidx.appcompat;
+}
 
 export class Printer implements PrinterApi {
 
@@ -15,7 +21,7 @@ export class Printer implements PrinterApi {
   }
 
   private static isPrintingSupported(): boolean {
-    return android.support.v4.print.PrintHelper.systemSupportsPrint();
+    return PrintPackageName.PrintHelper.systemSupportsPrint();
   }
 
   public isSupported(): Promise<boolean> {
@@ -42,9 +48,8 @@ export class Printer implements PrinterApi {
         };
 
         // see https://developer.android.com/training/printing/photos.html
-        let PrintHelper = android.support.v4.print.PrintHelper;
-        let printHelper = new PrintHelper(application.android.foregroundActivity);
-        printHelper.setScaleMode(PrintHelper.SCALE_MODE_FIT);
+        let printHelper = new PrintPackageName.PrintHelper(application.android.foregroundActivity);
+        printHelper.setScaleMode(PrintPackageName.PrintHelper.SCALE_MODE_FIT);
         let jobName = "MyPrintJob";
         printHelper.printBitmap(jobName, image);
 
