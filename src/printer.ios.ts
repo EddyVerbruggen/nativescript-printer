@@ -3,7 +3,6 @@ import { DeviceType } from "tns-core-modules/ui/enums";
 import { device } from "tns-core-modules/platform";
 import { View } from "tns-core-modules/ui/core/view";
 import * as frame from "tns-core-modules/ui/frame";
-import * as utils from "tns-core-modules/utils/utils";
 
 export class Printer implements PrinterApi {
 
@@ -50,7 +49,7 @@ export class Printer implements PrinterApi {
         };
 
         if (device.deviceType === DeviceType.Tablet) {
-          let view = utils.ios.getter(UIApplication, UIApplication.sharedApplication).keyWindow.rootViewController.view;
+          let view = UIApplication.sharedApplication.keyWindow.rootViewController.view;
           let theFrame: any = frame.topmost().currentPage.frame;
           controller.presentFromRectInViewAnimatedCompletionHandler(theFrame, view, true, callback);
         } else {
@@ -86,7 +85,7 @@ export class Printer implements PrinterApi {
         };
 
         if (device.deviceType === DeviceType.Tablet) {
-          let view = utils.ios.getter(UIApplication, UIApplication.sharedApplication).keyWindow.rootViewController.view;
+          let view = UIApplication.sharedApplication.keyWindow.rootViewController.view;
           let theFrame: any = frame.topmost().currentPage.frame;
           controller.presentFromRectInViewAnimatedCompletionHandler(theFrame, view, true, callback);
         } else {
