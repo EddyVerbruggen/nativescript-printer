@@ -2,7 +2,7 @@ import * as application from "tns-core-modules/application";
 import { View } from "tns-core-modules/ui/core/view";
 import * as frame from "tns-core-modules/ui/frame";
 import * as utils from "tns-core-modules/utils/utils";
-import { PrinterApi, PrintImageOptions, PrintOptions, PrintScreenOptions } from "./printer.common";
+import {PrinterApi, PrintImageOptions, PrintOptions, PrintPDFOptions, PrintScreenOptions} from "./printer.common";
 
 declare let android, global: any;
 
@@ -93,4 +93,33 @@ export class Printer implements PrinterApi {
       }
     });
   }
+
+  public printPDF(arg: PrintPDFOptions): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      try {
+        let file = new java.io.File(arg.pdfPath);
+
+        if (!file.exists()) {
+          reject('File does not exist');
+          return;
+        }
+
+        let fileDescriptor = android.os.ParcelFileDescriptor.open(file, android.os.ParcelFileDescriptor.MODE_READ_ONLY);
+        let pdfRenderer = android.graphics.pdf.PdfRenderer(fileDescriptor);
+
+        let page = pdfRenderer.openPage(0);
+
+        let bmp = android.graphics.Bitmap.createBitmap(page.getWidth(), page.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);
+        page.render(bmp, null, null, android.graphics.pdf.PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+
+        page.close();
+        pdfRenderer.close();
+
+        this._printImage(bmp, {}).then(resolve, reject);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
 }
