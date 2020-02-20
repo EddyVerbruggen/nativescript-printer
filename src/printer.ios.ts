@@ -145,6 +145,8 @@ export class Printer implements PrinterApi {
   public printPDF(arg: PrintPDFOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
       try {
+        // note that if we want to also support online files, we could use:
+        // let url = NSURL.URLWithString(arg.pdfPath);
         let url = NSURL.fileURLWithPath(arg.pdfPath);
         this._printImage(url, arg).then(resolve, reject);
       } catch (e) {

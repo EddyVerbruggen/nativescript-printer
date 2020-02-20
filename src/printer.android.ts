@@ -105,8 +105,7 @@ export class Printer implements PrinterApi {
         }
 
         let fileDescriptor = android.os.ParcelFileDescriptor.open(file, android.os.ParcelFileDescriptor.MODE_READ_ONLY);
-        let pdfRenderer = android.graphics.pdf.PdfRenderer(fileDescriptor);
-
+        let pdfRenderer = new android.graphics.pdf.PdfRenderer(fileDescriptor);
         let page = pdfRenderer.openPage(0);
 
         let bmp = android.graphics.Bitmap.createBitmap(page.getWidth(), page.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);

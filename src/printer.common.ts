@@ -36,4 +36,6 @@ export interface PrinterApi {
   printScreen(arg?: PrintScreenOptions): Promise<boolean>;
 
   printImage(arg: PrintImageOptions): Promise<boolean>;
+
+  printPDF(arg: PrintPDFOptions): Promise<boolean>;
 }

@@ -73,6 +73,21 @@ printer.printImage({
 });
 ```
 
+### `printPDF`
+
+##### TypeScript
+```typescript
+import { knownFolders } from "tns-core-modules/file-system/file-system";
+
+printer.printPDF({
+  pdfPath: knownFolders.currentApp().path + "/pdf-test.pdf"
+}).then((success) => {
+  alert(success ? "Printed!" : "Not printed");
+}, (error) => {
+  alert("Error: " + error);
+});
+```
+
 ### `printScreen`
 Prints the current screen contents. Anything off screen will not be printed.
 
