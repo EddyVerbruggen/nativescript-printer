@@ -26,6 +26,10 @@ export interface PrintImageOptions extends PrintOptions {
   imageSrc: ImageSource;
 }
 
+export interface PrintPDFOptions extends PrintOptions {
+  pdfPath: string;
+}
+
 export interface PrinterApi {
   isSupported(): Promise<boolean>;
 

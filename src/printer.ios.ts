@@ -1,4 +1,4 @@
-import { PrinterApi, PrintOptions, PrintImageOptions, PrintScreenOptions } from "./printer.common";
+import {PrinterApi, PrintOptions, PrintImageOptions, PrintScreenOptions, PrintPDFOptions} from "./printer.common";
 import { DeviceType } from "tns-core-modules/ui/enums";
 import { device } from "tns-core-modules/platform";
 import { View } from "tns-core-modules/ui/core/view";
@@ -25,7 +25,7 @@ export class Printer implements PrinterApi {
     });
   }
 
-  private _printImage(image: any /* UIImage | NSData */, options?: PrintOptions): Promise<boolean> {
+  private _printImage(image: any /* UIImage | NSData | NSURL */, options?: PrintOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
       if (!Printer.isPrintingSupported()) {
@@ -136,6 +136,17 @@ export class Printer implements PrinterApi {
 
           this._printImage(img, arg).then(resolve, reject);
         }
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  public printPDF(arg: PrintPDFOptions): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      try {
+        let url = NSURL.fileURLWithPath(arg.pdfPath);
+        this._printImage(url, arg).then(resolve, reject);
       } catch (e) {
         reject(e);
       }
