@@ -4,6 +4,7 @@ import { ImageSource } from "tns-core-modules/image-source";
 import { isAndroid } from "tns-core-modules/platform";
 import { View } from "tns-core-modules/ui/core/view";
 import { alert } from "tns-core-modules/ui/dialogs";
+import { knownFolders } from "tns-core-modules/file-system/file-system";
 
 let fs = require("tns-core-modules/file-system");
 let data = require('./data.json');
@@ -65,6 +66,18 @@ export class HelloWorldModel extends Observable {
     let view: View = args.object.page.getViewById("webView");
     this.printer.printScreen({
       view: view
+    }).then((success) => {
+      HelloWorldModel.feedback(success);
+    }, (error) => {
+      alert("Error: " + error);
+    });
+  }
+
+  public printPDF(args) {
+    this.printer.printPDF({
+      // online files are no currently supported
+      // pdfPath: "https://www.orimi.com/pdf-test.pdf"
+      pdfPath: knownFolders.currentApp().path + "/pdf-test.pdf"
     }).then((success) => {
       HelloWorldModel.feedback(success);
     }, (error) => {

@@ -2,24 +2,25 @@
   "nativescript": {
     "id": "org.nativescript.demo.printer",
     "tns-ios": {
-      "version": "6.0.0-rc-2019-06-28-105002-01"
+      "version": "6.4.0"
     },
     "tns-android": {
-      "version": "6.0.0-rc-2019-07-04-174325-01"
+      "version": "6.4.1"
     }
   },
   "dependencies": {
     "nativescript-printer": "file:../src",
-    "nativescript-unit-test-runner": "~0.6.2",
-    "tns-core-modules": "6.0.0-rc-2019-06-28-175837-02"
+    "nativescript-unit-test-runner": "0.7.0",
+    "tns-core-modules": "~6.4.0"
   },
   "devDependencies": {
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
     "babylon": "6.18.0",
     "lazy": "1.0.11",
-    "nativescript-dev-webpack": "1.0.0-rc-2019-07-02-161545-02",
-    "tns-platform-declarations": "6.0.0-rc-2019-06-28-175837-02",
-    "typescript": "3.4.1"
+    "nativescript-dev-webpack": "~1.5.0",
+    "tns-platform-declarations": "~6.4.0",
+    "typescript": "~3.5.0",
+    "karma-webpack": "3.0.5"
   }
 }

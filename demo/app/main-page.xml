@@ -10,6 +10,8 @@
 
       <Button text="Print this screen" tap="{{ printScreen }}" class="button button-b" />
 
+      <Button text="Print PDF" tap="{{ printPDF }}" class="button button-b" />
+
       <Button text="Print WebView" tap="{{ printWebView }}" class="button button-b" />
 
       <Button text="Print HtmlView" tap="{{ printHtmlView }}" class="button button-b" />
