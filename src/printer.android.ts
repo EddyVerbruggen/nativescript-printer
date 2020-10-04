@@ -1,14 +1,11 @@
-import * as application from "tns-core-modules/application";
-import { View } from "tns-core-modules/ui/core/view";
-import * as frame from "tns-core-modules/ui/frame";
-import * as utils from "tns-core-modules/utils/utils";
-import {PrinterApi, PrintImageOptions, PrintOptions, PrintPDFOptions, PrintScreenOptions} from "./printer.common";
+import { Application, Frame, Utils, View } from "@nativescript/core";
+import { PrinterApi, PrintImageOptions, PrintOptions, PrintPDFOptions, PrintScreenOptions } from "./printer.common";
 
 declare let android, global: any;
 
 const PrintPackageName = useAndroidX() ? global.androidx.print : android.support.v4.print;
 
-function useAndroidX () {
+function useAndroidX() {
   return global.androidx && global.androidx.appcompat;
 }
 
@@ -17,7 +14,7 @@ export class Printer implements PrinterApi {
   private printManager: any; // android.print.PrintManager;
 
   constructor() {
-    this.printManager = utils.ad.getApplicationContext().getSystemService(android.content.Context.PRINT_SERVICE);
+    this.printManager = Utils.ad.getApplicationContext().getSystemService(android.content.Context.PRINT_SERVICE);
   }
 
   private static isPrintingSupported(): boolean {
@@ -48,7 +45,7 @@ export class Printer implements PrinterApi {
         };
 
         // see https://developer.android.com/training/printing/photos.html
-        let printHelper = new PrintPackageName.PrintHelper(application.android.foregroundActivity);
+        let printHelper = new PrintPackageName.PrintHelper(Application.android.foregroundActivity);
         printHelper.setScaleMode(PrintPackageName.PrintHelper.SCALE_MODE_FIT);
         let jobName = "MyPrintJob";
         printHelper.printBitmap(jobName, image);
@@ -81,7 +78,7 @@ export class Printer implements PrinterApi {
           bmp = android.graphics.Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), android.graphics.Bitmap.Config.ARGB_8888);
           view.android.draw(new android.graphics.Canvas(bmp));
         } else {
-          let view: View = frame.topmost().currentPage.content;
+          let view: View = Frame.topmost().currentPage.content;
           view.android.setDrawingCacheEnabled(true);
           bmp = android.graphics.Bitmap.createBitmap(view.android.getDrawingCache());
           view.android.setDrawingCacheEnabled(false);

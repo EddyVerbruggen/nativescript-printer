@@ -1,5 +1,4 @@
-import { ImageSource } from "tns-core-modules/image-source";
-import { View } from "tns-core-modules/ui/core/view";
+import { ImageSource, View } from "@nativescript/core";
 
 export interface PrintOptions {
   /**

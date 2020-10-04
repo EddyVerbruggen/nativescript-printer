@@ -1,9 +1,0 @@
-android {
-    defaultConfig {
-        generatedDensities = []
-        applicationId = "org.nativescript.demo.printer"
-    }
-    aaptOptions {
-        additionalParameters "--no-version-vectors"
-    }
-}
