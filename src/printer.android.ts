@@ -1,5 +1,5 @@
 import { Application, Frame, View } from "@nativescript/core";
-import * as utils from '@nativescript/core/utils/utils';
+import * as utils from "@nativescript/core/utils/utils";
 import { PrinterApi, PrintImageOptions, PrintOptions, PrintPDFOptions, PrintScreenOptions } from "./printer.common";
 
 declare let android, global: any;

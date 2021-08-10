@@ -1,6 +1,5 @@
-import { Device, View, Frame } from "@nativescript/core";
-import { DeviceType } from "@nativescript/core/ui/enums";
-import {PrinterApi, PrintOptions, PrintImageOptions, PrintScreenOptions, PrintPDFOptions} from "./printer.common";
+import { CoreTypes, Device, View, Frame } from "@nativescript/core";
+import { PrinterApi, PrintOptions, PrintImageOptions, PrintScreenOptions, PrintPDFOptions } from "./printer.common";
 
 export class Printer implements PrinterApi {
 
@@ -46,7 +45,7 @@ export class Printer implements PrinterApi {
           resolve(success);
         };
 
-        if (Device.deviceType === DeviceType.Tablet) {
+        if (Device.deviceType === CoreTypes.DeviceType.Tablet) {
           let view = UIApplication.sharedApplication.keyWindow.rootViewController.view;
           let theFrame: any = Frame.topmost().currentPage.frame;
           controller.presentFromRectInViewAnimatedCompletionHandler(theFrame, view, true, callback);
@@ -82,7 +81,7 @@ export class Printer implements PrinterApi {
           resolve(success);
         };
 
-        if (Device.deviceType === DeviceType.Tablet) {
+        if (Device.deviceType === CoreTypes.DeviceType.Tablet) {
           let view = UIApplication.sharedApplication.keyWindow.rootViewController.view;
           let theFrame: any = Frame.topmost().currentPage.frame;
           controller.presentFromRectInViewAnimatedCompletionHandler(theFrame, view, true, callback);
