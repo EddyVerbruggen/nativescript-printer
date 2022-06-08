@@ -95,6 +95,11 @@ export class Printer implements PrinterApi {
   public printPDF(arg: PrintPDFOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
       try {
+        let file = new java.io.File(arg.pdfPath);
+        if (!file.exists()) {
+          reject('File does not exist');
+          return;
+        }
         let printManager = Application.android.foregroundActivity.getSystemService(android.content.Context.PRINT_SERVICE);
         let jobName = "Print PDF";
         let PrintPDFAdapter = android.print.PrintDocumentAdapter.extend({
