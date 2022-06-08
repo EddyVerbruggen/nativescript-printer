@@ -116,13 +116,13 @@ export class Printer implements PrinterApi {
               }
               callback.onWriteFinished(pages);
             } catch (e){
-              console.error(e);
+              reject(e);
             } finally {
               try {
                 input.close();
                 output.close();
               } catch (e) {
-                console.error(e);
+                reject(e);
               }
             }
           },
@@ -135,7 +135,7 @@ export class Printer implements PrinterApi {
               let pdi = new android.print.PrintDocumentInfo.Builder("print_output.pdf").setContentType(android.print.PrintDocumentInfo.CONTENT_TYPE_DOCUMENT).build();
               callback.onLayoutFinished(pdi, true);
             } catch (e) {
-              console.error(e);
+              reject(e);
             }
           },
         });
