@@ -95,24 +95,61 @@ export class Printer implements PrinterApi {
   public printPDF(arg: PrintPDFOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
       try {
-        let file = new java.io.File(arg.pdfPath);
-
-        if (!file.exists()) {
-          reject('File does not exist');
-          return;
+        let printManager = Application.android.foregroundActivity.getSystemService(android.content.Context.PRINT_SERVICE);
+        let jobName = "Print PDF";
+        let PrintPDFAdapter = android.print.PrintDocumentAdapter.extend({
+          onWrite(pages, destination, cancellationSignal, callback) {
+            let input;
+            let output;
+            try {
+              input = new java.io.FileInputStream(new java.io.File(arg.pdfPath));
+              output = new java.io.FileOutputStream(destination.getFileDescriptor());
+              let buf = new Array.create("byte", 1024);
+              let bytesRead;
+              while ((bytesRead = input.read(buf)) > 0) {
+                output.write(buf, 0, bytesRead);
+              }
+              callback.onWriteFinished(pages);
+            } catch (e){
+              console.error(e);
+            } finally {
+              try {
+                input.close();
+                output.close();
+              } catch (e) {
+                console.error(e);
+              }
+            }
+          },
+          onLayout(oldAttributes, newAttributes, cancellationSignal, callback, extras){
+            try {
+              if (cancellationSignal.isCanceled()) {
+                callback.onLayoutCancelled();
+                return;
+              }
+              let pdi = new android.print.PrintDocumentInfo.Builder("print_output.pdf").setContentType(android.print.PrintDocumentInfo.CONTENT_TYPE_DOCUMENT).build();
+              callback.onLayoutFinished(pdi, true);
+            } catch (e) {
+              console.error(e);
+            }
+          },
+        });
+        let pda = new PrintPDFAdapter();
+        let printJob = printManager.print(jobName, pda, null);
+        let onFinish = function(status) {
+          resolve(status);
+          clearInterval(interval);
         }
-
-        let fileDescriptor = android.os.ParcelFileDescriptor.open(file, android.os.ParcelFileDescriptor.MODE_READ_ONLY);
-        let pdfRenderer = new android.graphics.pdf.PdfRenderer(fileDescriptor);
-        let page = pdfRenderer.openPage(0);
-
-        let bmp = android.graphics.Bitmap.createBitmap(page.getWidth(), page.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);
-        page.render(bmp, null, null, android.graphics.pdf.PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
-
-        page.close();
-        pdfRenderer.close();
-
-        this._printImage(bmp, {}).then(resolve, reject);
+        let onError = function(status) {
+          reject(status);
+          clearInterval(interval);
+        }
+        let interval = setInterval(() => {
+          let state = printJob.getInfo().getState();
+          if (state === 6) onError("print failed");
+          if (state === 7) onError("print cancelled");
+          if (state === 5) onFinish("print completed");
+        }, 500);
       } catch (e) {
         reject(e);
       }
