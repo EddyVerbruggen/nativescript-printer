@@ -1,5 +1,5 @@
 import { Application, Frame, View } from "@nativescript/core";
-import * as utils from "@nativescript/core/utils/utils";
+import { Utils } from "@nativescript/core"
 import { PrinterApi, PrintImageOptions, PrintOptions, PrintPDFOptions, PrintScreenOptions } from "./printer.common";
 
 declare let android, global: any;
@@ -15,7 +15,7 @@ export class Printer implements PrinterApi {
   private printManager: any; // android.print.PrintManager;
 
   constructor() {
-    this.printManager = utils.ad.getApplicationContext().getSystemService(android.content.Context.PRINT_SERVICE);
+    this.printManager = Utils.android.getApplicationContext().getSystemService(android.content.Context.PRINT_SERVICE);
   }
 
   private static isPrintingSupported(): boolean {
